@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanteraPRO", "PanteraPRO\PanteraPRO.csproj", "{CD3DFBC2-3857-43D2-AC29-3EA2DDF7DE71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD3DFBC2-3857-43D2-AC29-3EA2DDF7DE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD3DFBC2-3857-43D2-AC29-3EA2DDF7DE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD3DFBC2-3857-43D2-AC29-3EA2DDF7DE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD3DFBC2-3857-43D2-AC29-3EA2DDF7DE71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B170F1E5-8F7B-4910-B3C0-DF8B6CC8811B}
+	EndGlobalSection
+EndGlobal
