@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
-using HidLibrary;
 using PanteraPRO.Properties;
 using Timer = System.Timers.Timer;
 
@@ -19,10 +19,8 @@ namespace PanteraPRO
         private const float BatteryDecreaseRate = 0.05f;
         private const float BatteryIncreaseRate = 1.1f;
 
-        private const int VendorId = 0x25A7;
+        private const string MouseName = "USB\\VID_25A7&PID_FA7B\\5&356B5377&0&3";
         private const int FindDeviceSleepTime = 1000;
-
-        private const string MouseName = "2.4G Dual Mode Mouse";
 
         private readonly NotifyIcon notifyIcon;
         private readonly Timer timer;
@@ -69,21 +67,23 @@ namespace PanteraPRO
                 while (!driverToken.IsCancellationRequested)
                 {
                     var found = false;
-                    var devices = HidDevices.Enumerate(VendorId);
-                    foreach (var device in devices)
+                    var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+                    foreach (var managementBaseObject in searcher.Get())
                     {
-                        if (device != null)
+                        var obj = (ManagementObject) managementBaseObject;
+                        foreach (var prop in obj.Properties)
                         {
-                            device.ReadProduct(out var productBytes);
-                            var product = ReadString(productBytes);
-
-                            if (product.Equals(MouseName))
+                            if (prop.Name == "DeviceID" && prop.Value.ToString() == MouseName)
                             {
                                 found = true;
                                 break;
                             }
                         }
+
+                        obj.Dispose();
                     }
+
+                    searcher.Dispose();
 
                     if (found != isCharging)
                     {
