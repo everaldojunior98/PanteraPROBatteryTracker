@@ -91,9 +91,29 @@ namespace PanteraPRO.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Battery25 {
+        internal static System.Drawing.Bitmap Battery20 {
             get {
-                object obj = ResourceManager.GetObject("Battery25", resourceCulture);
+                object obj = ResourceManager.GetObject("Battery20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battery30 {
+            get {
+                object obj = ResourceManager.GetObject("Battery30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battery40 {
+            get {
+                object obj = ResourceManager.GetObject("Battery40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -111,9 +131,39 @@ namespace PanteraPRO.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Battery75 {
+        internal static System.Drawing.Bitmap Battery60 {
             get {
-                object obj = ResourceManager.GetObject("Battery75", resourceCulture);
+                object obj = ResourceManager.GetObject("Battery60", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battery70 {
+            get {
+                object obj = ResourceManager.GetObject("Battery70", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battery80 {
+            get {
+                object obj = ResourceManager.GetObject("Battery80", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Battery90 {
+            get {
+                object obj = ResourceManager.GetObject("Battery90", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

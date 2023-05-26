@@ -16,14 +16,13 @@ namespace PanteraPRO
 
         private const int UpdateInterval = 60 * 1000;
 
-        private const float BatteryDecreaseRate = 0.05f;
-        private const float BatteryIncreaseRate = 1.1f;
+        private const float BatteryDecreaseRate = 0.07f;
+        private const float BatteryIncreaseRate = 1f;
 
         private const string MouseName = "USB\\VID_25A7&PID_FA7B\\5&356B5377&0&3";
         private const int FindDeviceSleepTime = 1000;
 
         private readonly NotifyIcon notifyIcon;
-        private readonly Timer timer;
 
         private readonly ManualResetEvent deviceResetEvent;
         private readonly CancellationTokenSource driverToken;
@@ -33,9 +32,14 @@ namespace PanteraPRO
         private bool isCharging;
 
         private Icon battery100Icon;
-        private Icon battery75Icon;
+        private Icon battery90Icon;
+        private Icon battery80Icon;
+        private Icon battery70Icon;
+        private Icon battery60Icon;
         private Icon battery50Icon;
-        private Icon battery25Icon;
+        private Icon battery40Icon;
+        private Icon battery30Icon;
+        private Icon battery20Icon;
         private Icon batteryWarningIcon;
         private Icon batteryChargingIcon;
 
@@ -56,7 +60,7 @@ namespace PanteraPRO
 
             UpdateVisuals();
 
-            timer = new Timer(UpdateInterval);
+            var timer = new Timer(UpdateInterval);
             timer.Enabled = true;
             timer.Elapsed += TimerElapsed;
 
@@ -110,11 +114,6 @@ namespace PanteraPRO
             Application.Exit();
         }
 
-        private string ReadString(byte[] bytes)
-        {
-            return Encoding.UTF8.GetString(bytes).Replace("\0", string.Empty);
-        }
-
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             if (isCharging)
@@ -138,9 +137,15 @@ namespace PanteraPRO
         private void LoadIcons()
         {
             battery100Icon = Icon.FromHandle(Resources.Battery100.GetHicon());
-            battery75Icon = Icon.FromHandle(Resources.Battery75.GetHicon());
+            battery90Icon = Icon.FromHandle(Resources.Battery90.GetHicon());
+            battery80Icon = Icon.FromHandle(Resources.Battery80.GetHicon());
+            battery70Icon = Icon.FromHandle(Resources.Battery70.GetHicon());
+            battery60Icon = Icon.FromHandle(Resources.Battery60.GetHicon());
             battery50Icon = Icon.FromHandle(Resources.Battery50.GetHicon());
-            battery25Icon = Icon.FromHandle(Resources.Battery25.GetHicon());
+            battery40Icon = Icon.FromHandle(Resources.Battery40.GetHicon());
+            battery30Icon = Icon.FromHandle(Resources.Battery30.GetHicon());
+            battery20Icon = Icon.FromHandle(Resources.Battery20.GetHicon());
+
             batteryWarningIcon = Icon.FromHandle(Resources.BatteryWarning.GetHicon());
             batteryChargingIcon = Icon.FromHandle(Resources.BatteryCharging.GetHicon());
         }
@@ -149,14 +154,24 @@ namespace PanteraPRO
         {
             if (isCharging && currentBattery < 100)
                 return batteryChargingIcon;
-            if (currentBattery >= 75)
+            if (currentBattery >= 90)
                 return battery100Icon;
+            if (currentBattery >= 80)
+                return battery90Icon;
+            if (currentBattery >= 70)
+                return battery80Icon;
+            if (currentBattery >= 60)
+                return battery70Icon;
             if (currentBattery >= 50)
-                return battery75Icon;
-            if (currentBattery >= 25)
+                return battery60Icon;
+            if (currentBattery >= 40)
                 return battery50Icon;
+            if (currentBattery >= 30)
+                return battery40Icon;
+            if (currentBattery >= 20)
+                return battery30Icon;
             if (currentBattery >= 10)
-                return battery25Icon;
+                return battery20Icon;
             if (currentBattery >= 0)
                 return batteryWarningIcon;
             return batteryChargingIcon;
@@ -171,8 +186,18 @@ namespace PanteraPRO
 
         private float LoadBatteryPercentage()
         {
-            var settings = PanteraSettings.Load();
-            return settings.BatteryPercentage;
+            try
+            {
+                var settings = PanteraSettings.Load();
+                return settings.BatteryPercentage;
+            }
+            catch
+            {
+                currentBattery = 100;
+                SaveBatteryPercentage();
+            }
+
+            return currentBattery;
         }
 
         private float Clamp(float min, float max, float current)
